@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История Нашей Семьи</title>
+    
+    <!-- CSS для семейного альбома -->
+    <link rel="stylesheet" href="../css/style_family.css">
+    
+    <!-- Шрифты Merriweather и Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Демо-баннер -->
+    <div class="demo-banner">Демо-версия</div>
+
+    <!-- Заголовок сайта -->
+    <header class="header">
+        <div class="theme-switcher-wrapper">
+            <button class="theme-switcher" id="themeSwitcher" aria-label="Переключить тему">
+                <span class="theme-switcher__icon">🌙</span>
+            </button>
+        </div>
+        
+        <h1 class="header__title">История Нашей Семьи</h1>
+        <p class="header__subtitle">Самые ценные моменты, собранные вместе</p>
+        
+        <div class="intro-block">
+            <p class="intro-block__text">
+                Годы летят, дети растут, а воспоминания остаются с нами навсегда. Этот альбом — наша маленькая машина времени, хранящая тепло объятий, искренность улыбок и радость каждого дня, проведённого вместе.
+            </p>
+        </div>
+
+        <!-- Мини-плеер -->
+        <div class="mini-player">
+            <button class="mini-player__btn" id="miniPlayerBtn">
+                <span class="mini-player__icon">▶</span>
+                <span class="mini-player__text">Включить мелодию</span>
+            </button>
+            <audio id="miniPlayerAudio" preload="metadata" loop>
+                <source src="../audio/family_main_theme.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+            </audio>
+        </div>
+    </header>
+
+    <!-- Основная галерея -->
+    <main class="main">
+        <div class="gallery" id="gallery">
+            <!-- Карточки генерируются из JS -->
+        </div>
+    </main>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal__content">
+            <button class="modal__close" id="modalClose">&times;</button>
+        
+            <div class="modal__image-container">
+                <img src="" alt="" class="modal__image" id="modalImage">
+            </div>
+        
+            <div class="modal__info-container">
+                <div class="modal__info">
+                    <h2 class="modal__title" id="modalTitle"></h2>
+                    <p class="modal__description" id="modalDescription"></p>
+                    <div class="modal__meta" id="modalMeta"></div>
+                </div>
+                           
+                <div class="modal__navigation">
+                    <button class="modal__nav-btn modal__nav-prev" id="prevBtn">‹</button>
+                    <span class="modal__counter" id="modalCounter"></span>
+                    <button class="modal__nav-btn modal__nav-next" id="nextBtn">›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <p>Создано с любовью для нашей семьи</p>
+    </footer>
+
+    <!-- JS для семейного альбома -->
+    <script src="../js/data_family.js"></script>
+    <script src="../js/script_family.js"></script>
+</body>
+</html>

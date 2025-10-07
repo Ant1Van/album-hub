@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио Фотографа</title>
+    
+    <!-- Подключаем CSS для фотографа -->
+    <link rel="stylesheet" href="../css/style_photographer.css">
+    
+    <!-- Подключаем шрифты Montserrat и Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Демо-баннер -->
+    <div class="demo-banner">Демо-версия</div>
+
+    <!-- Заголовок сайта -->
+    <header class="header">
+        <div class="theme-switcher-wrapper">
+            <button class="theme-switcher" id="themeSwitcher" aria-label="Переключить тему">
+                <span class="theme-switcher__icon">🌙</span>
+            </button>
+        </div>
+        
+        <h1 class="header__title">Алексей Новиков</h1>
+        <p class="header__subtitle">Пейзажная и портретная фотография</p>
+    </header>
+
+    <!-- Основная галерея -->
+    <main class="main">
+        <div class="gallery" id="gallery">
+            <!-- Карточки генерируются из JS -->
+        </div>
+    </main>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal__content">
+            <button class="modal__close" id="modalClose">&times;</button>
+        
+            <div class="modal__image-container">
+                <img src="" alt="" class="modal__image" id="modalImage">
+            </div>
+        
+            <div class="modal__info-container">
+                <div class="modal__info">
+                    <h2 class="modal__title" id="modalTitle"></h2>
+                    <p class="modal__description" id="modalDescription"></p>
+                    <div class="modal__meta" id="modalMeta">
+                        <!-- Метаданные будут здесь -->
+                    </div>
+                </div>
+                           
+                <div class="modal__navigation">
+                    <button class="modal__nav-btn modal__nav-prev" id="prevBtn">‹</button>
+                    <span class="modal__counter" id="modalCounter"></span>
+                    <button class="modal__nav-btn modal__nav-next" id="nextBtn">›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <p>© 2025 Алексей Новиков. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем JS для фотографа -->
+    <script src="../js/data_photographer.js"></script>
+    <script src="../js/script_photographer.js"></script>
+</body>
+</html>

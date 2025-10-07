@@ -1,0 +1,255 @@
+/*
+ *  ДИЗАЙН-КОНЦЕПЦИЯ: "ПОРТФОЛИО ФОТОГРАФА"
+ *  ПАЛИТРА: Монохромная (белый, черный, серый).
+ *  ШРИФТЫ: Montserrat для заголовков, Roboto для текста.
+ *  НАСТРОЕНИЕ: Минимализм, профессионализм, чистота.
+ */
+
+/* ------------------- */
+/* -- ОСНОВНЫЕ ТЕМЫ -- */
+/* ------------------- */
+:root, [data-theme="light"] {
+    --bg: #f9f9f9;
+    --card-bg: #ffffff;
+    --border: #e5e5e5;
+    --text-primary: #222222;
+    --text-secondary: #777777;
+    --accent: #222222;
+    --accent-hover: #555555;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --border: #333333;
+    --text-primary: #f5f5f5;
+    --text-secondary: #aaaaaa;
+    --accent: #f5f5f5;
+    --accent-hover: #cccccc;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------- */
+/* --- ОБЩИЕ СТИЛИ --- */
+/* ------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ------------------- */
+/* ------ ШАПКА ------ */
+/* ------------------- */
+.header {
+    text-align: center;
+    padding: 6rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+.header__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.header__subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 0.5rem;
+}
+
+/* ------------------- */
+/* ----- ГАЛЕРЕЯ ----- */
+/* ------------------- */
+.main { padding: 4rem 2rem; }
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+.photo-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.photo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+}
+.photo-card__image-wrapper {
+    overflow: hidden;
+    aspect-ratio: 1/1;
+}
+.photo-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.photo-card:hover .photo-card__image { transform: scale(1.05); }
+.photo-card__info { padding: 1.5rem; }
+.photo-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ------------------- */
+/* --- МОДАЛКА --- */
+/* ------------------- */
+.modal {
+    display: none; align-items: center; justify-content: center;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    padding: 1rem;
+}
+.modal__content {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    height: 90vh;
+    background: var(--bg);
+    position: relative;
+}
+.modal__close {
+    position: absolute; top: 1rem; right: 1.5rem;
+    background: transparent; border: 0;
+    color: var(--text-secondary);
+    font-size: 2.5rem; cursor: pointer; z-index: 10;
+    transition: all 0.2s ease;
+}
+.modal__close:hover { color: var(--accent); }
+.modal__image-container {
+    flex: 3;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.modal__image { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
+.modal__info-container {
+    flex: 1;
+    min-width: 320px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-left: 1px solid var(--border);
+}
+.modal__info { flex-grow: 1; }
+.modal__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+.modal__description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.modal__meta {
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.modal__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+}
+.modal__counter { color: var(--text-secondary); font-size: 1rem; }
+.modal__nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.modal__nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ------------------- */
+/* --- ПЕРЕКЛЮЧАТЕЛЬ -- */
+/* ------------------- */
+.theme-switcher-wrapper { position: absolute; top: 2rem; right: 2rem; z-index: 5; }
+.theme-switcher {
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.theme-switcher:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ------------------- */
+/* ------ ФУТЕР ------ */
+/* ------------------- */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+/* ------------------- */
+/* ---- ДЕМО-БАННЕР -- */
+/* ------------------- */
+.demo-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    z-index: 9999;
+    user-select: none;
+}
+
+/* ------------------- */
+/* ---- АДАПТИВ ------ */
+/* ------------------- */
+@media (max-width: 900px) {
+    .modal__content { flex-direction: column; height: auto; max-height: 95vh; }
+    .modal__image-container { flex: 1; min-height: 300px; padding: 0.5rem; }
+    .modal__info-container { flex: 0; min-width: auto; border-left: 0; border-top: 1px solid var(--border); }
+}
+@media (max-width: 600px) {
+    .main { padding: 2rem 1rem; }
+    .gallery { grid-template-columns: 1fr; gap: 1.5rem; }
+    .header { padding: 4rem 1rem; }
+}

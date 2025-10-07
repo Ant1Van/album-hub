@@ -1,0 +1,332 @@
+/*
+ *  ДИЗАЙН-КОНЦЕПЦИЯ: "КОСМИЧЕСКАЯ ЛЮБОВЬ"
+ *  ПАЛИТРА: Темно-синий космос, акцентное золото, мягкий белый текст.
+ *  ШРИФТЫ: Элегантный Cormorant Garamond для заголовков, чистый Nunito Sans для текста.
+ *  НАСТРОЕНИЕ: Премиальное, таинственное, романтичное, элегантное.
+ */
+
+/* ------------------- */
+/* -- ОСНОВНЫЕ ТЕМЫ -- */
+/* ------------------- */
+:root, [data-theme="cosmic-dark"] {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --accent: #f0c475;
+    --accent-hover: #faf0dc;
+    --shadow: 0 0 20px rgba(240, 196, 117, 0.2);
+    --gradient: linear-gradient(45deg, #f0c475, #e0a94f);
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Nunito Sans', sans-serif;
+}
+
+[data-theme="daylight"] {
+    --bg: #f8f6f2;
+    --card-bg: #ffffff;
+    --border: #e8e3d9;
+    --text-primary: #3d352e;
+    --text-secondary: #8a7f75;
+    --accent: #b68f40;
+    --accent-hover: #8e6d24;
+    --shadow: 0 10px 20px rgba(182, 143, 64, 0.1);
+    --gradient: linear-gradient(45deg, #b68f40, #a17b30);
+}
+
+/* ------------------- */
+/* --- ОБЩИЕ СТИЛИ --- */
+/* ------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    transition: background-color 0.4s ease;
+}
+
+/* ------------------- */
+/* ----- ЗВЕЗДЫ ------ */
+/* ------------------- */
+@keyframes move-twink-back { from {background-position:0 0;} to {background-position:-10000px 5000px;} }
+.header { position: relative; overflow: hidden; }
+#stars, #stars2, #stars3 {
+    position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%; display:block;
+}
+#stars { background:#0d1117 url(https://www.script-tutorials.com/demos/360/images/stars.png) repeat top center; z-index:-3; }
+#stars2 { background:transparent url(https://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center; z-index:-2; animation:move-twink-back 200s linear infinite; }
+#stars3 { background:transparent url(https://www.script-tutorials.com/demos/360/images/clouds.png) repeat top center; z-index:-1; }
+[data-theme="daylight"] #stars, [data-theme="daylight"] #stars2, [data-theme="daylight"] #stars3 { display: none; }
+
+/* ------------------- */
+/* ------ ШАПКА ------ */
+/* ------------------- */
+.header {
+    text-align: center;
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+.header__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 0 0 15px rgba(240, 196, 117, 0.3);
+    letter-spacing: 2px;
+}
+.header__subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+}
+
+/* ------------------- */
+/* -- "ПИСЬМО ЛЮБВИ" -- */
+/* ------------------- */
+.love-letter {
+    max-width: 800px;
+    margin: 0 auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+}
+.love-letter__text {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* ------------------- */
+/* ---- МИНИ-ПЛЕЕР --- */
+/* ------------------- */
+.mini-player { margin-top: 2rem; }
+.mini-player__btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 10px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.mini-player__btn:hover, .mini-player__btn.playing {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: var(--shadow);
+}
+[data-theme="daylight"] .mini-player__btn:hover, [data-theme="daylight"] .mini-player__btn.playing {
+    color: var(--card-bg);
+}
+
+/* ------------------- */
+/* ----- ГАЛЕРЕЯ ----- */
+/* ------------------- */
+.main { padding: 4rem 2rem; }
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.photo-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/5;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    transition: all 0.4s ease;
+}
+.photo-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+}
+.photo-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.photo-card:hover .photo-card__image { transform: scale(1.05); }
+.photo-card__overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 3rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(13, 17, 23, 0.9) 20%, transparent);
+    color: #fff;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+[data-theme="daylight"] .photo-card__overlay {
+     background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 20%, transparent);
+     color: var(--text-primary);
+}
+.photo-card:hover .photo-card__overlay { transform: translateY(0); }
+.photo-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* ------------------- */
+/* --- МОДАЛКА --- */
+/* ------------------- */
+.modal {
+    display: none; align-items: center; justify-content: center;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(13, 17, 23, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    padding: 1rem;
+}
+.modal__content {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    max-height: 800px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.modal__close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: transparent; border: 0;
+    color: var(--text-secondary);
+    font-size: 2rem; cursor: pointer; z-index: 10;
+    transition: all 0.2s ease;
+}
+.modal__close:hover { color: var(--accent); transform: rotate(90deg); }
+.modal__image-container { flex: 3; background: #000; display: flex; align-items: center; justify-content: center; }
+.modal__image { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
+.modal__info-container { flex: 2; padding: 2rem; display: flex; flex-direction: column; overflow-y: auto; }
+.modal__info { flex-grow: 1; }
+.modal__title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+.modal__description { color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.6; }
+.modal__date {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+}
+.modal__navigation { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; padding-top: 1rem; }
+.modal__counter { color: var(--text-secondary); font-size: 1.1rem; }
+.modal__nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.modal__nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ------------------- */
+/* --- АУДИОПЛЕЕР ---- */
+/* ------------------- */
+.modal__audio-container { margin-top: 2rem; }
+.custom-audio-player { border: 1px solid var(--border); padding: 1rem; }
+.audio-info { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+.audio-title { font-weight: bold; }
+.audio-time { font-size: 0.9rem; color: var(--text-secondary); }
+.progress-container { margin-bottom: 1rem; }
+.audio-progress { width: 100%; height: 4px; background: var(--border); cursor: pointer; }
+.progress-bar { height: 100%; width: 0; background: var(--accent); }
+.audio-controls { display: flex; align-items: center; gap: 1rem; }
+.control-btn {
+    background: transparent; border: 0; color: var(--accent);
+    cursor: pointer; transition: color 0.2s ease;
+}
+.control-btn:hover { color: var(--accent-hover); }
+.volume-control { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+.volume-slider-container { width: 80px; }
+.volume-slider { width: 100%; height: 4px; background: var(--border); cursor: pointer; }
+.volume-level { height: 100%; width: 30%; background: var(--accent); }
+
+
+/* ------------------- */
+/* --- ПЕРЕКЛЮЧАТЕЛЬ -- */
+/* ------------------- */
+.theme-switcher-wrapper { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 5; }
+.theme-switcher {
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.theme-switcher:hover { color: var(--accent); border-color: var(--accent); transform: rotate(45deg); }
+
+/* ------------------- */
+/* ------ ФУТЕР ------ */
+/* ------------------- */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+/* ------------------- */
+/* ---- АДАПТИВ ------ */
+/* ------------------- */
+@media (max-width: 900px) {
+    .modal__content { flex-direction: column; height: 95vh; max-height: none; }
+    .modal__image-container { flex: 1; min-height: 200px; }
+    .modal__info-container { flex: 1; }
+}
+@media (max-width: 600px) {
+    .main { padding: 2rem 1rem; }
+    .gallery { grid-template-columns: 1fr; }
+    .header { padding: 4rem 1rem; }
+}
+
+/* ======================================================= */
+/* ================== НОВЫЙ ДЕМО-БАННЕР ================== */
+/* ======================================================= */
+.demo-banner {
+    position: fixed;
+    top: 25px;
+    left: -45px;
+    width: 180px;
+    padding: 8px 0;
+    background-color: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    user-select: none;
+    transition: all 0.4s ease;
+}
+
+[data-theme="daylight"] .demo-banner {
+    color: var(--card-bg); /* Для лучшего контраста на светлой теме */
+}

@@ -1,0 +1,296 @@
+/*
+ *  ДИЗАЙН-КОНЦЕПЦИЯ: "СЕМЕЙНАЯ ХРОНИКА"
+ *  ПАЛИТРА: Тёплая, уютная (кремовый, бежевый, терракотовый).
+ *  ШРИФТЫ: Merriweather для заголовков, Lato для текста.
+ *  НАСТРОЕНИЕ: Ностальгия, тепло, уют, надёжность.
+ */
+
+/* ------------------- */
+/* -- ОСНОВНЫЕ ТЕМЫ -- */
+/* ------------------- */
+:root, [data-theme="warm-light"] {
+    --bg: #fdfaf6;
+    --card-bg: #ffffff;
+    --border: #edeae4;
+    --text-primary: #3a3532;
+    --text-secondary: #8a7f75;
+    --accent: #c59d7b;
+    --accent-hover: #b18a68;
+    --shadow: 0 8px 25px rgba(197, 157, 123, 0.15);
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+[data-theme="warm-dark"] {
+    --bg: #2c2a29;
+    --card-bg: #3a3836;
+    --border: #52504e;
+    --text-primary: #e0dedc;
+    --text-secondary: #a19f9c;
+    --accent: #d4b397;
+    --accent-hover: #e2c8b0;
+    --shadow: 0 8px 25px rgba(212, 179, 151, 0.1);
+}
+
+/* ------------------- */
+/* --- ОБЩИЕ СТИЛИ --- */
+/* ------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* ------------------- */
+/* ------ ШАПКА ------ */
+/* ------------------- */
+.header {
+    text-align: center;
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    background-color: var(--card-bg);
+}
+.header__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.header__subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+.intro-block {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* ------------------- */
+/* ---- МИНИ-ПЛЕЕР --- */
+/* ------------------- */
+.mini-player { margin-top: 1rem; }
+.mini-player__btn {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: var(--bg);
+    padding: 12px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.mini-player__btn:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
+.mini-player__btn.playing {
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* ------------------- */
+/* ----- ГАЛЕРЕЯ ----- */
+/* ------------------- */
+.main { padding: 4rem 2rem; }
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.photo-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.photo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+}
+.photo-card__image-wrapper {
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.photo-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.photo-card:hover .photo-card__image { transform: scale(1.05); }
+.photo-card__info { padding: 1.25rem; }
+.photo-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.photo-card__meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* ------------------- */
+/* --- МОДАЛКА --- */
+/* ------------------- */
+.modal {
+    display: none; align-items: center; justify-content: center;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(42, 40, 39, 0.9);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    padding: 1rem;
+}
+.modal__content {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    height: 85vh;
+    background: var(--card-bg);
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.modal__close {
+    position: absolute; top: 1rem; right: 1.5rem;
+    background: transparent; border: 0;
+    color: var(--text-secondary);
+    font-size: 2rem; cursor: pointer; z-index: 10;
+    transition: all 0.2s ease;
+}
+.modal__close:hover { color: var(--accent); }
+.modal__image-container {
+    flex: 2;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.modal__image { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.3s ease; box-shadow: var(--shadow); }
+.modal__info-container {
+    flex: 1;
+    min-width: 300px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.modal__info { flex-grow: 1; }
+.modal__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+.modal__description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.modal__meta {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+.modal__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+.modal__counter { color: var(--text-secondary); }
+.modal__nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 45px; height: 45px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.modal__nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ------------------- */
+/* --- ПЕРЕКЛЮЧАТЕЛЬ -- */
+/* ------------------- */
+.theme-switcher-wrapper { position: absolute; top: 2rem; right: 2rem; z-index: 5; }
+.theme-switcher {
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.theme-switcher:hover { color: var(--accent); }
+
+/* ------------------- */
+/* ------ ФУТЕР ------ */
+/* ------------------- */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    background-color: var(--card-bg);
+}
+
+/* ------------------- */
+/* ---- ДЕМО-БАННЕР -- */
+/* ------------------- */
+.demo-banner {
+    position: fixed;
+    top: 15px;
+    left: -45px;
+    width: 180px;
+    transform: rotate(-45deg);
+    padding: 8px 0;
+    background-color: var(--accent);
+    color: var(--card-bg);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    user-select: none;
+}
+
+/* ------------------- */
+/* ---- АДАПТИВ ------ */
+/* ------------------- */
+@media (max-width: 900px) {
+    .modal__content { flex-direction: column; height: auto; max-height: 95vh; }
+    .modal__image-container { flex: 1; min-height: 300px; padding: 1rem; }
+    .modal__info-container { flex: 0; min-width: auto; }
+}
+@media (max-width: 600px) {
+    .main { padding: 2rem 1rem; }
+    .gallery { grid-template-columns: 1fr; gap: 1.5rem; }
+    .header { padding: 4rem 1rem; }
+}
